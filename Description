@@ -1,1 +1,25 @@
-if curl -s -N '
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alec Mendoza - About Me</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello, I'm Alec Mendoza</h1>
+    <p>Welcome to my about me page on GitHub!</p>
+    <p>I gratuated from Notre Dame College with a bachelors of Arts in Software Development. I hope to become a software developer. </p>
+    <p> https://www.linkedin.com/in/alec-mendoza-4895bb210/ </p>
+    <p> <img src="filename.jpg" alt="Description of the image"> </p>
+</body>
+</html>
