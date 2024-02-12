@@ -1,0 +1,120 @@
+---
+title: "Week 5"
+author: "Alec Mendoza"
+date: "2024-02-12"
+output: html_document
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Load necessary libraries
+library(tidyverse)
+library(caret)
+
+# Load and explore the historical loans and payments data
+loan_data <- read.csv("historical_loans.csv")
+
+# Explore the structure of the dataset
+str(loan_data)
+
+# Perform data preprocessing (handle missing values, outliers, etc.)
+# ...
+
+# Explore summary statistics
+summary(loan_data)
+# Split the data into training and testing sets
+set.seed(123)
+train_index <- createDataPartition(loan_data$repayment_status, p = 0.8, list = FALSE)
+train_data <- loan_data[train_index, ]
+test_data <- loan_data[-train_index, ]
+
+# Select a suitable machine learning algorithm
+# ...
+
+# Train the model
+# ...
+
+# Evaluate model performance
+# ...
+
+```
+What are some potential sources of bias in the underlying data?
+
+Sampling Bias: If the historical data is not representative of the entire population, it may lead to sampling bias. For example, if certain demographics are overrepresented or underrepresented in the dataset, the model may not generalize well to the broader population.
+Historical Bias: Past lending practices, which may have been biased, can perpetuate historical bias in the data. For instance, if certain groups were unfairly denied loans in the past, the model might inadvertently learn and perpetuate those biases.
+Labeling Bias: The labels assigned to historical data may themselves be biased, especially if there were inconsistencies or subjective judgments in determining whether a loan was repaid on time.
+
+```{r Loans}
+# Split the data into training and testing sets
+set.seed(123)
+train_index <- createDataPartition(loan_data$repayment_status, p = 0.8, list = FALSE)
+train_data <- loan_data[train_index, ]
+test_data <- loan_data[-train_index, ]
+
+# Select a suitable machine learning algorithm
+# ...
+
+# Train the model
+# ...
+
+# Evaluate model performance
+# ...
+
+# Establish decision rules based on the model's predictions
+# ...
+
+# Define criteria for denying a loan or adjusting interest rates/penalties
+# ...
+
+# Integrate the model into the loan approval process
+# ...
+
+# Train relevant staff on how to interpret and use the model's predictions
+# ...
+
+
+
+```
+
+How might biases be introduced in the data science pipeline?
+
+Feature Selection Bias: Choosing features without considering their potential bias may introduce or exacerbate bias. For example, using income as a feature might lead to bias if income is correlated with certain demographic factors.
+Algorithmic Bias: Certain machine learning algorithms may inherently favor specific groups or exhibit bias. It's crucial to carefully select and evaluate algorithms to mitigate this risk.
+Data Preprocessing Bias: Biases can be introduced during data preprocessing, such as imputing missing values or scaling features. If not done carefully, these steps can inadvertently reinforce existing biases.
+
+
+```{r pressure, echo=FALSE}
+# Regularly monitor the model's performance
+# ...
+
+# Collect feedback from loan officers and improve the model and decision-making process
+# ...
+
+
+```
+
+What are the risks to fairness in downstream applications and deployment of the model described?
+
+Discriminatory Impact: If the model disproportionately denies loans or increases interest rates for specific demographic groups, it can lead to discriminatory impact and perpetuate existing social inequalities.
+Feedback Loop: If the model's decisions influence future data (e.g., denied applicants may have lower credit scores in the future), a feedback loop can reinforce and amplify biases over time.
+Transparency and Explainability: Lack of transparency in the model's decision-making process may lead to distrust. If applicants can't understand why a decision was made, it can be challenging to address concerns about fairness.
+Regulatory Compliance: Biased decisions may violate anti-discrimination laws and regulations, leading to legal and reputational risks for the bank.
+
+
+
+
+
+How would you describe a false positive in this problem to a policymaker or business owner? What’s the potential harm/cost of one?
+
+A false positive occurs when the model predicts that a loan applicant is at risk of not repaying on time, leading to a decision to deny the loan, but in reality, the applicant would have repaid the loan successfully.The potential harm of a false positive is that deserving applicants might be unfairly denied loans. This could result in lost business opportunities for the bank, harm to customer relations, and negative impacts on the bank's reputation. Additionally, there may be implications for customer satisfaction and potential legal concerns if the denial is unjustified.
+
+How would you describe a false negative to a policymaker or business owner? What’s the potential harm/cost of one?
+
+A false negative occurs when the model predicts that a loan applicant is not at risk of repayment issues, leading to approval, but the applicant actually ends up not repaying the loan on time.The potential harm of a false negative is the increased risk of financial losses for the bank due to loans not being repaid as predicted. This could result in decreased overall repayment rates, financial strain, and potential write-offs. Additionally, it may impact the bank's ability to manage risk effectively and maintain a healthy loan portfolio.
+
+What confusion matrix metric (e.g., FPR, FNR, TPR, FDR, etc.) would you choose to focus on in terms of equity for this case? Think of the fairness tree here.
+
+For the purpose of equity and fairness, focusing on the False Discovery Rate (FDR) may be crucial in this case. FDR is calculated as the ratio of false positives to the total predicted positives (false positives + true positives). It represents the proportion of approved loans that were wrongly predicted to be at risk. Minimizing FDR is important as it directly relates to the equity in loan approvals, ensuring that deserving applicants are not unfairly denied loans.Additionally, considering disparate impact, it is essential to evaluate the False Positive Rate (FPR) across different demographic groups to identify and mitigate any potential biases. Monitoring and minimizing the FPR for each group can contribute to a fair and unbiased lending process.
+
+
